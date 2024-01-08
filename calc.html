@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Calculator</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="calculator" style="display: grid; grid-template-columns: repeat(4, 1fr); grid-gap: 8px; max-width: 300px; margin: auto; text-align: center; border: 2px solid black; border-radius: 8px; overflow: hidden; padding: 10px; background-color: lightblue;">
+        <div id="display" style="grid-column: span 4; height: 40px; font-size: 18px; text-align: right; padding: 8px; border-bottom: 1px solid black; margin-bottom: 10px; background-color: white;"></div>
+        <button style="padding: 15px; font-size: 16px; cursor: pointer; border: 1px solid black; background-color: #87CEFA; margin: 10px;" onclick="clearDisplay()">C</button>
+        <button style="padding: 15px; font-size: 16px; cursor: pointer; border: 1px solid black; background-color: #87CEFA; margin: 10px;" onclick="appendCharacter('/')">/</button>
+        <button style="padding: 15px; font-size: 16px; cursor: pointer; border: 1px solid black; background-color: #87CEFA; margin: 10px;" onclick="appendCharacter('*')">*</button>
+        <button style="padding: 15px; font-size: 16px; cursor: pointer; border: 1px solid black; background-color: #87CEFA; margin: 10px;" onclick="backspace()">←</button>
+        <button style="padding: 15px; font-size: 16px; cursor: pointer; border: 1px solid black; background-color: #87CEFA; margin: 10px;" onclick="appendCharacter('7')">7</button>
+        <button style="padding: 15px; font-size: 16px; cursor: pointer; border: 1px solid black; background-color: #87CEFA; margin: 10px;" onclick="appendCharacter('8')">8</button>
+        <button style="padding: 15px; font-size: 16px; cursor: pointer; border: 1px solid black; background-color: #87CEFA; margin: 10px;" onclick="appendCharacter('9')">9</button>
+        <button style="padding: 15px; font-size: 16px; cursor: pointer; border: 1px solid black; background-color: #87CEFA; margin: 10px;" onclick="appendCharacter('-')">-</button>
+        <button style="padding: 15px; font-size: 16px; cursor: pointer; border: 1px solid black; background-color: #87CEFA; margin: 10px;" onclick="appendCharacter('4')">4</button>
+        <button style="padding: 15px; font-size: 16px; cursor: pointer; border: 1px solid black; background-color: #87CEFA; margin: 10px;" onclick="appendCharacter('5')">5</button>
+        <button style="padding: 15px; font-size: 16px; cursor: pointer; border: 1px solid black; background-color: #87CEFA; margin: 10px;" onclick="appendCharacter('6')">6</button>
+        <button style="padding: 15px; font-size: 16px; cursor: pointer; border: 1px solid black; background-color: #87CEFA; margin: 10px;" onclick="appendCharacter('+')">+</button>
+        <button style="padding: 15px; font-size: 16px; cursor: pointer; border: 1px solid black; background-color: #87CEFA; margin: 10px;" onclick="appendCharacter('1')">1</button>
+        <button style="padding: 15px; font-size: 16px; cursor: pointer; border: 1px solid black; background-color: #87CEFA; margin: 10px;" onclick="appendCharacter('2')">2</button>
+        <button style="padding: 15px; font-size: 16px; cursor: pointer; border: 1px solid black; background-color: #87CEFA; margin: 10px;" onclick="appendCharacter('3')">3</button>
+        <button style="padding: 15px; font-size: 16px; cursor: pointer; border: 1px solid black; background-color: #87CEFA; margin: 10px;" onclick="calculateResult()">=</button>
+        <button style="padding: 15px; font-size: 16px; cursor: pointer; border: 1px solid black; background-color: #87CEFA; margin: 10px;" onclick="appendCharacter('0')">0</button>
+        <button style="padding: 15px; font-size: 16px; cursor: pointer; border: 1px solid black; background-color: #87CEFA; margin: 10px;" onclick="appendCharacter('.')">.</button>
+    </div>
+
+    <script>
+        let display = document.getElementById('display');
+        let expression = '';
+
+        function appendCharacter(char) {
+            expression += char;
+            updateDisplay();
+        }
+
+        function clearDisplay() {
+            expression = '';
+            updateDisplay();
+        }
+
+        function backspace() {
+            expression = expression.slice(0, -1);
+            updateDisplay();
+        }
+
+        function calculateResult() {
+            try {
+                expression = eval(expression).toString();
+                updateDisplay();
+            } catch (error) {
+                display.textContent = 'Error';
+            }
+        }
+
+        function updateDisplay() {
+            display.textContent = expression;
+        }
+    </script>
+</body>
+</html>
